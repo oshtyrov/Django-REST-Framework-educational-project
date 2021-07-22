@@ -1,8 +1,10 @@
-import AuthorList from './components/Author.js';
 import React from 'react';
 import axios from 'axios';
 import logo from './logo.svg';
 import './App.css';
+import UserList from './components/User.js'
+import Footer from './components/Footer.js'
+import Menu from './components/Menu.js'
 
 
 
@@ -11,31 +13,33 @@ class App extends React.Component {
    constructor(props) {
        super(props)
        this.state = {
-           'authors': []
+           'users': []
        }
    }
 
     componentDidMount() {
-       axios.get('http://127.0.0.1:8000/api/authors')
+       axios.get('http://127.0.0.1:8000/api/users')
            .then(response => {
-               const authors = response.data
-                   this.setState(
-                   {
-                       'authors': authors
-                   }
-               )
+               this.setState({users: response.data})
            }).catch(error => console.log(error))
     }
 
-   render () {
-       return (
+    render() {
+        return (
            <div>
-               <AuthorList authors={this.state.authors} />
+             <header>
+             <Menu />
+             </header>
+             <main>
+             <div className="container">
+               <UserList users={this.state.users} />
+             </div>
+             </main>
+             <Footer />
            </div>
-       )
+           )
    }
 }
-
 
 export default App;
 
