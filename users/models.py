@@ -7,3 +7,5 @@ class User(AbstractUser):
     email = models.EmailField(max_length=64, blank=False, unique=True)
     phone = PhoneNumberField(blank=False)
     photo = models.ImageField(blank=True)
+
+
