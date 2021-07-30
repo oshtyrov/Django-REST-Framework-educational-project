@@ -1,13 +1,32 @@
 import React from 'react'
+import {
+  Link
+} from "react-router-dom";
+
+function NavbarItem({name, href}) {
+    return (
+        <li>
+          <Link to={href}>{name}</Link>
+        </li>
+    )
+}
 
 
-export default function Footer() {
-  return (
-        <ul>
-            <li><a href="#">Главная</a></li>
-            <li><a href="#">Проекты</a></li>
-            <li><a href="#">Заметки</a></li>
-            <li><a href="#">Личный кабинет</a></li>
-        </ul>
-  );
+export default function Navbar({navbarItems}) {
+    return (
+        <nav>
+            <a>Menu</a>
+            <div>
+              <ul>
+                <li>
+                  {navbarItems.map((item) => <NavbarItem name={item.name} href={item.href} />)}
+                </li>
+              </ul>
+              <form>
+                <input placeholder="Search" aria-label="Search" />
+                <button type="submit">Search</button>
+              </form>
+            </div>
+        </nav>
+    )
 }
