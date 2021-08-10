@@ -122,7 +122,7 @@ class App extends React.Component {
                 <header>
                     <Navbar navbarItems={this.state.navbarItems} />
                     <li>
-                        {this.is_authenticated() ? <button onClick={()=>this.logout()}>Logout</button> : <Link to='/login'>Login</Link>}
+                        {this.is_authenticated() ? <button onClick={()=>this.logout()}Logout</button> : <Link to='/login'>Login</Link>}
                     </li>
                 </header>
                 <main>
