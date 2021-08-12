@@ -8,7 +8,7 @@ from .views import UserViewSet
 from .models import User
 
 
-class TestUserViewSet(TestCase):
+class TestUserViewSetTestCase(TestCase):
 
     def test_get_list(self):
         factory = APIRequestFactory()
@@ -23,33 +23,41 @@ class TestUserViewSet(TestCase):
         response = client.get(f'/api/users/{user.id}/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+
+class TestUserViewSetAPITestCase(APITestCase):
+
+    def test_get_list(self):
+        response = self.client.get('/api/users/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_get_user(self):
+        user = mixer.blend(User)
+        response = self.client.get(f'/api/users/{user.id}/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_put_unauthorized_user(self):
+        user = mixer.blend(User)
+        response = self.client.put(f'/api/users/{user.id}/',
+                                   {"username": "Васятко", "phone": "+380631591111", "password": "qwert1234",
+                                    "email": "qwer@gmail.com"}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
     def test_edit_admin(self):
-        user = User.objects.create(username='Васятко', phone="+700000000")
-        client = APIClient()
-        admin = User.objects.create_superuser('admin', 'admin@admin.com', 'admin123456')
-        client.login(username='admin', password='admin123456')
-        response = client.put(f'/api/users/{user.id}/', {'username': 'Галина', 'phone': '+800000000'})
+        user = mixer.blend(User)
+        admin = User.objects.create_superuser(username='admin', email='admin@admin.com',
+                                              password='admin123456', phone='+380631591111')
+        response = self.client.get(f'/api/users/{admin.id}/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(admin.username, "admin")
+        self.client.login(username='admin', password='admin123456')
+        response = self.client.put(f'/api/users/{user.id}/',
+                                   {"username": "Васятко", "phone": "+380631591111", "password": "qwert1234",
+                                    "email": "qwer@gmail.com"}, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         user = User.objects.get(id=user.id)
-        self.assertEqual(user.username, 'Галина')
-        self.assertEqual(user.phone, '+800000000')
-        client.logout()
+        self.assertEqual(user.username, "Васятко")
 
-    # def test_post_user(self):
-    #     factory = APIRequestFactory()
-    #     admin = User.objects.create_superuser('test', 'test@test.com', 'qwerty123456')
-    #     # test_user = mixer.blend(User)
-    #     # request = factory.post('/api/users/', {'results': [test_user]})
-    #     request = factory.post('/api/users/', {
-    #         "results": [
-    #             {
-    #                 "username": "111",
-    #                 "first_name": "111",
-    #                 "last_name": "111",
-    #                 "email": "shtyrov89@gmail.com"
-    #             }
-    #         ]})
-    #     force_authenticate(request, admin)
-    #     view = UserViewSet.as_view({'post': 'create'})
-    #     response = view(request)
-    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+
+

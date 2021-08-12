@@ -22,6 +22,4 @@ class UserViewSet(mixins.ListModelMixin,
             return UserSerializer
         return UserSerializerBase
 
-# class UserViewSet(ModelViewSet):
-#     serializer_class = UserSerializer
-#     queryset = User.objects.all()
+
