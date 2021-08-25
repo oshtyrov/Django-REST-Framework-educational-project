@@ -14,7 +14,7 @@ class ProjectkForm extends React.Component {
         this.setState({
                     [event.target.name]: event.target.value
                 });
-                console.log([event.target.name])
+                // console.log([event.target.name])
     }
 
     handleUserChange(event) {
@@ -28,7 +28,7 @@ class ProjectkForm extends React.Component {
         let users = []
         for(let i=0; i < event.target.selectedOptions.length; i++) {
             users.push(event.target.selectedOptions.item(i).value)
-            console.log(users)
+            // console.log(users)
         }
         this.setState({
             'users': users
@@ -36,10 +36,10 @@ class ProjectkForm extends React.Component {
     }
 
     handleSubmit(event) {
-      this.props.createBook(this.state.name, this.state.users);
+      this.props.createProject(this.state.name, this.state.users);
       event.preventDefault();
     }
-  
+   
     render() {
       return (
         <form onSubmit={(event)=> this.handleSubmit(event)}>
