@@ -5,8 +5,8 @@ class ToDoForm extends React.Component {
     constructor(props) {
       super(props)
       this.state = {
-        projectName: '',
-        userName: '',
+        projectId: '',
+        userId: '',
         text: ''
       }
 
@@ -23,13 +23,13 @@ class ToDoForm extends React.Component {
     }
 
     handleUserChange(event) {    
-        this.setState({userName: event.target.value,
+        this.setState({userId: event.target.value,
                 });
                 console.log(event.target.value)
     }
 
     handleProjectChange(event) {    
-        this.setState({projectName: event.target.value,
+        this.setState({projectId: event.target.value,
                 });
                 console.log(event.target.value)
     }
@@ -37,7 +37,7 @@ class ToDoForm extends React.Component {
 
     handleSubmit(event) {
         console.log(this.state.text)
-      this.props.createToDo(this.state.userName, this.state.projectName, this.state.text);
+      this.props.createToDo(this.state.userId, this.state.projectId, this.state.text);
       event.preventDefault();
     }
    
@@ -47,12 +47,12 @@ class ToDoForm extends React.Component {
                 <label>project</label>
                 <select name="project" className='form-control' 
                     onChange={(event)=>this.handleProjectChange(event)}>
-                    {this.props.projects.map((project)=><option value={project.name}>{project.name}</option>)}
+                    {this.props.projects.map((project)=><option value={project.id}>{project.name}</option>)}
                 </select>
                 <label>user</label>
                 <select name="user" className='form-control' 
                     onChange={(event)=>this.handleUserChange(event)}>
-                    {this.props.users.map((user)=><option value={user.username}>{user.username}</option>)}
+                    {this.props.users.map((user)=><option value={user.id}>{user.username}</option>)}
                 </select>
                 <label>text</label>
                 <input type="text" className="form-control" value={this.state.text}

@@ -123,11 +123,11 @@ class App extends React.Component {
             }).catch(error => console.log(error))
       }
 
-      createToDo(userName, projectName, text) {
-        console.log(userName, projectName, text)
+      createToDo(userId, projectId, text) {
+        console.log(userId, projectId, text)
         const headers = this.get_headers()
         axios.post(`http://127.0.0.1:8000/api/todos/`,
-            {"user": userName, "project": projectName, "text": text, "is_active": true},    
+            {"user": userId, "project": projectId, "text": text, "is_active": true},    
             {headers},
             )
             .then(response => {
@@ -181,7 +181,7 @@ class App extends React.Component {
                                 <ToDoForm
                                 projects={this.state.projects}
                                 users={this.state.users}
-                                createToDo={(userName, projectName, text) => this.createToDo(userName, projectName, text)} />} />
+                                createToDo={(userId, projectId, text) => this.createToDo(userId, projectId, text)} />} />
                            <Route exact path='/projects' component={() => <ProjectList 
                                 items={this.state.projects} 
                                 deleteProject={(id)=>this.deleteProject(id)}/>} />
