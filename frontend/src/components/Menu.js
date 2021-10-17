@@ -22,10 +22,6 @@ export default function Navbar({navbarItems}) {
                   {navbarItems.map((item) => <NavbarItem name={item.name} href={item.href} />)}
                 </li>
               </ul>
-              <form>
-                <input placeholder="Search" aria-label="Search" />
-                <button type="submit">Search</button>
-              </form>
             </div>
         </nav>
     )
