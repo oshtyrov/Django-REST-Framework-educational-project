@@ -1,4 +1,4 @@
-Django REST Framework educational project. 13.07.2021 - 30.08.2021.
+Django REST Framework educational project. July - august 2021.
 
 djangorestframework
 django-phonenumber-field
