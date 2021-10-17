@@ -1,3 +1,5 @@
+Django REST Framework educational project.
+
 djangorestframework
 django-phonenumber-field
 markdown
