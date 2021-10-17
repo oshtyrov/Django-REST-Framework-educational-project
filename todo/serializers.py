@@ -15,6 +15,12 @@ class ProjectSerializer(ModelSerializer):
         fields = '__all__'
 
 
+class ProjectSerializerBase(ModelSerializer):
+    class Meta:
+        model = Project
+        fields = '__all__'
+
+
 class ToDoSerializer(ModelSerializer):
     # project = HyperlinkedIdentityField(view_name='project-detail')
     # user = HyperlinkedIdentityField(view_name='user-detail')
@@ -25,3 +31,9 @@ class ToDoSerializer(ModelSerializer):
         model = ToDo
         fields = '__all__'
         # exclude = ('is_active',)
+
+
+class ToDoSerializerBase(ModelSerializer):
+    class Meta:
+        model = ToDo
+        fields = '__all__'
