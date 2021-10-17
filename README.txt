@@ -1,1 +1,9 @@
-Lesson_1
+djangorestframework
+django-phonenumber-field
+markdown
+django-filter
+django-cors-headers
+
+npx
+axios
+react-router-dom
